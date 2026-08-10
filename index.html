@@ -365,7 +365,7 @@
                 <span>Мұғалім</span>
             </div>
             <div class="nav-item" onclick="switchTab('profile', this)">
-                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0-1.51 1z"></path></svg>
                 <span>Баптау</span>
             </div>
         </nav>
@@ -395,7 +395,7 @@
 
         // =========================================================================
         // МЫНА ЖЕРГЕ ӨЗІҢІЗДІҢ FIREBASE МӘЛІМЕТТЕРІҢІЗДІ ҚОЙЫҢЫЗ:
-        // Алдындағы "//" белгілерін алып тастап, өз мәліметтеріңізді жазыңыз
+        // Бұл баптауларды өзгертудің ҚАЖЕТІ ЖОҚ, сіздікін орнатып қойдым.
         const USER_FIREBASE_CONFIG = {
             apiKey: "AIzaSyA13ujiszxfoshyQudKguMe1X3WPoP0q0c",
             authDomain: "diktant-ji.firebaseapp.com",
@@ -642,7 +642,9 @@
             if (!db || !auth.currentUser) {
                 container.innerHTML = `<div style="text-align:center; padding: 20px; color: var(--neon-red); background: rgba(255,0,0,0.1); border-radius: 10px;">
                     <strong>Деректер қоры қосылмаған!</strong><br><br>
-                    Кодтың ішіндегі <code>USER_FIREBASE_CONFIG</code> деген жерге өз Firebase мәліметтеріңізді енгізбедіңіз.
+                    Бұл қатенің екі себебі болуы мүмкін:<br>
+                    1) Интернет байланысы жоқ.<br>
+                    2) Firebase баптауларында <strong>"Authentication -> Anonymous" (Анонимді тіркелу) қосылмаған!</strong> Соны қосыңыз.
                 </div>`;
                 return;
             }
@@ -699,6 +701,7 @@
         document.addEventListener('DOMContentLoaded', () => {
             const saved = localStorage.getItem('sauat_api_key');
             if (saved) document.getElementById('api-key-input').value = saved;
+            initFirebase();
         });
 
     </script>
